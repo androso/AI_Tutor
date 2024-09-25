@@ -30,7 +30,7 @@ def attach_files_to_assistant(client, file_ids, assistant_id):
 
 def check_and_upload_files(client, assistant_id):
     
-    assistant_files = client.beta.assistants.files.list(assistant_id=assistant_id)
+    assistant_files = client.beta.vector_stores.files.list(assistant_id=assistant_id)
     files_info = [file.id for file in assistant_files.data]
     if not files_info:
         st.warning("No Files Included, Upload Educational Material")

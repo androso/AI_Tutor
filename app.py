@@ -12,7 +12,7 @@ from openai import OpenAI
 import api_handler
 from api_handler import send_query_get_response
 from chat_gen import generate_html
-from file_upload import upload_files_to_assistant, attach_files_to_assistant, check_and_upload_files
+# from file_upload import upload_files_to_assistant, attach_files_to_assistant 
 
 logo=Image.open('logo.png')
 sb_logo=Image.open('sb_logo.png')
@@ -46,26 +46,26 @@ if api_key:
     assistant_id = 'asst_ysmkUaCVBbItPUPeszDFDT68'
 
     # File Handling Section
-    files_info = check_and_upload_files(client, assistant_id)
+    # files_info = check_and_upload_files(client, assistant_id)
     
-    st.markdown(f'Number of files uploaded in the assistant: :blue[{len(files_info)}]')
-    st.divider()
+    # st.markdown(f'Number of files uploaded in the assistant: :blue[{len(files_info)}]')
+    # st.divider()
 
     # Sidebar for Additional Features
     st.sidebar.header('EduMentor: AI-Tutor')
     st.sidebar.image(logo,width=120)
     st.sidebar.caption('Made by D')
     # Adding a button in the sidebar to delete all files from the assistant
-    if st.sidebar.button('Delete All Files from Assistant'):
-        # Retrieve all file IDs associated with the assistant
-        assistant_files_response = client.beta.assistants.files.list(assistant_id=assistant_id)
-        assistant_files = assistant_files_response.data
+    # if st.sidebar.button('Delete All Files from Assistant'):
+    #     # Retrieve all file IDs associated with the assistant
+    #     assistant_files_response = client.beta.assistants.files.list(assistant_id=assistant_id)
+    #     assistant_files = assistant_files_response.data
 
-        # Delete each file
-        for file in assistant_files:
-            file_id = file.id
-            client.beta.assistants.files.delete(assistant_id=assistant_id, file_id=file_id)
-            st.sidebar.success(f'Deleted file: {file_id}')
+    #     # Delete each file
+    #     for file in assistant_files:
+    #         file_id = file.id
+    #         client.beta.assistants.files.delete(assistant_id=assistant_id, file_id=file_id)
+    #         st.sidebar.success(f'Deleted file: {file_id}')
 
     if st.sidebar.button('Generate Chat History'):
         html_data = generate_html(st.session_state.messages)
